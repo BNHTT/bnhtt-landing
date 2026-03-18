@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { useLanguage } from "../../contexts/LanguageContext";
@@ -17,13 +18,21 @@ function ArrowIcon() {
 
 function HeroSection() {
   const { t } = useLanguage();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
   return (
     <div className="relative w-full overflow-hidden" style={{ height: "clamp(400px, 55vw, 800px)" }}>
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
