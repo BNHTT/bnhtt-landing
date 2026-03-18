@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 function ArrowIcon() {
@@ -21,29 +22,42 @@ function ArrowIcon() {
 function ProjectCard({
   title,
   stack,
+  subtitle,
   desc,
   status,
   color,
   tag,
+  delay = 0,
 }: {
   title: string;
   stack: string;
+  subtitle: string;
   desc: string;
   status: string;
   color: string;
   tag?: string;
+  delay?: number;
 }) {
   return (
-    <div className="flex flex-col gap-5 w-full group cursor-pointer">
-      <div className="relative rounded-[28px] overflow-hidden aspect-[16/9]">
-        <div className={`w-full h-full bg-gradient-to-br ${color} flex flex-col items-start justify-end p-8`}>
-          <span className="font-['IBM_Plex_Mono',monospace] text-white/50 text-xs tracking-widest uppercase mb-2">
+    <motion.div
+      className="flex flex-col gap-5 w-full group cursor-pointer"
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
+    >
+      <div className="relative rounded-[28px] overflow-hidden">
+        <div className={`w-full bg-gradient-to-br ${color} flex flex-col items-start justify-end p-8 min-h-[280px] md:min-h-[320px]`}>
+          <span className="font-['IBM_Plex_Mono',monospace] text-white/50 text-xs tracking-widest uppercase mb-3">
             {stack}
           </span>
-          <p className="font-['DM_Sans',sans-serif] text-white/80 text-sm leading-relaxed max-w-sm">
+          <p className="font-['DM_Sans',sans-serif] text-white font-medium text-sm leading-snug max-w-sm mb-2">
+            {subtitle}
+          </p>
+          <p className="font-['DM_Sans',sans-serif] text-white/60 text-sm leading-relaxed max-w-sm">
             {desc}
           </p>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-5 flex flex-wrap gap-2">
             <span className="font-['IBM_Plex_Mono',monospace] text-xs text-white/40 border border-white/20 rounded-full px-3 py-1">
               {status}
             </span>
@@ -64,7 +78,7 @@ function ProjectCard({
           {title}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -160,33 +174,37 @@ export default function ProjectsPage() {
         {/* Main projects grid */}
         <div className="flex flex-col gap-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {t.allProjects.slice(0, 2).map((p) => (
-              <ProjectCard key={p.title} {...p} />
+            {t.allProjects.slice(0, 2).map((p, i) => (
+              <ProjectCard key={p.title} {...p} delay={i * 0.15} />
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {t.allProjects.slice(2, 4).map((p) => (
-              <ProjectCard key={p.title} {...p} />
+            {t.allProjects.slice(2, 4).map((p, i) => (
+              <ProjectCard key={p.title} {...p} delay={i * 0.15} />
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {t.allProjects.slice(4, 6).map((p) => (
-              <ProjectCard key={p.title} {...p} />
+            {t.allProjects.slice(4, 6).map((p, i) => (
+              <ProjectCard key={p.title} {...p} delay={i * 0.15} />
             ))}
           </div>
         </div>
 
         {/* Academic projects */}
         <div className="mt-20">
-          <h2
+          <motion.h2
             className="font-['Inter',sans-serif] font-medium text-black mb-10"
             style={{ fontSize: "clamp(22px, 3vw, 50px)", lineHeight: 1.2 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5 }}
           >
             {t.academicLabel}
-          </h2>
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {t.academicProjects.map((p) => (
-              <ProjectCard key={p.title} {...p} />
+            {t.academicProjects.map((p, i) => (
+              <ProjectCard key={p.title} {...p} delay={i * 0.12} />
             ))}
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { motion } from "motion/react";
 import { useLanguage } from "../../contexts/LanguageContext";
 import svgPaths from "../../imports/svg-s096nqqoxa";
 
@@ -96,18 +97,23 @@ function AboutSection() {
 function ProjectPlaceholder({
   gradient,
   stack,
+  subtitle,
   desc,
 }: {
   gradient: string;
   stack: string;
+  subtitle: string;
   desc: string;
 }) {
   return (
-    <div className={`w-full h-full rounded-[28px] bg-gradient-to-br ${gradient} flex flex-col items-start justify-end gap-2 p-8`}>
-      <span className="font-['IBM_Plex_Mono',monospace] text-white/50 text-xs tracking-widest uppercase">
+    <div className={`w-full rounded-[28px] bg-gradient-to-br ${gradient} flex flex-col items-start justify-end gap-1 p-8 min-h-[260px] md:min-h-[300px]`}>
+      <span className="font-['IBM_Plex_Mono',monospace] text-white/50 text-xs tracking-widest uppercase mb-2">
         {stack}
       </span>
-      <p className="font-['DM_Sans',sans-serif] text-white/80 text-sm leading-relaxed">
+      <p className="font-['DM_Sans',sans-serif] text-white font-medium text-sm leading-snug">
+        {subtitle}
+      </p>
+      <p className="font-['DM_Sans',sans-serif] text-white/60 text-sm leading-relaxed">
         {desc}
       </p>
     </div>
@@ -125,17 +131,27 @@ function ProjectCard({
   title,
   stack,
   gradient,
+  subtitle,
   desc,
+  delay = 0,
 }: {
   title: string;
   stack: string;
   gradient: string;
+  subtitle: string;
   desc: string;
+  delay?: number;
 }) {
   return (
-    <div className="flex flex-col gap-5 w-full">
-      <div className="relative rounded-[28px] overflow-hidden aspect-[16/9]">
-        <ProjectPlaceholder gradient={gradient} stack={stack} desc={desc} />
+    <motion.div
+      className="flex flex-col gap-5 w-full"
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
+    >
+      <div className="relative rounded-[28px] overflow-hidden">
+        <ProjectPlaceholder gradient={gradient} stack={stack} subtitle={subtitle} desc={desc} />
       </div>
       <div className="flex items-center gap-3">
         <ArrowIcon />
@@ -146,7 +162,7 @@ function ProjectCard({
           {title}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -173,12 +189,12 @@ function ImpressiveWorksSection() {
 
       <div className="flex flex-col gap-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <ProjectCard title={projects[0].title} stack={projects[0].stack} gradient={projectGradients[0]} desc={projects[0].desc} />
-          <ProjectCard title={projects[1].title} stack={projects[1].stack} gradient={projectGradients[1]} desc={projects[1].desc} />
+          <ProjectCard title={projects[0].title} stack={projects[0].stack} gradient={projectGradients[0]} subtitle={projects[0].subtitle} desc={projects[0].desc} delay={0} />
+          <ProjectCard title={projects[1].title} stack={projects[1].stack} gradient={projectGradients[1]} subtitle={projects[1].subtitle} desc={projects[1].desc} delay={0.15} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <ProjectCard title={projects[2].title} stack={projects[2].stack} gradient={projectGradients[2]} desc={projects[2].desc} />
-          <ProjectCard title={projects[3].title} stack={projects[3].stack} gradient={projectGradients[3]} desc={projects[3].desc} />
+          <ProjectCard title={projects[2].title} stack={projects[2].stack} gradient={projectGradients[2]} subtitle={projects[2].subtitle} desc={projects[2].desc} delay={0} />
+          <ProjectCard title={projects[3].title} stack={projects[3].stack} gradient={projectGradients[3]} subtitle={projects[3].subtitle} desc={projects[3].desc} delay={0.15} />
         </div>
       </div>
 
