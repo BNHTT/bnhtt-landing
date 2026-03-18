@@ -21,7 +21,24 @@ function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    videoRef.current?.play().catch(() => {});
+    const video = videoRef.current;
+    if (!video) return;
+
+    let played = false;
+    const tryPlay = () => {
+      if (played) return;
+      video.play().then(() => { played = true; }).catch(() => {});
+    };
+
+    video.addEventListener("canplay", tryPlay);
+    video.addEventListener("loadeddata", tryPlay);
+    video.load();
+    tryPlay();
+
+    return () => {
+      video.removeEventListener("canplay", tryPlay);
+      video.removeEventListener("loadeddata", tryPlay);
+    };
   }, []);
 
   return (
