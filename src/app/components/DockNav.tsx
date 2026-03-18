@@ -103,7 +103,7 @@ interface DockItemProps {
 
 function DockItem({ to, href, active, label, children }: DockItemProps) {
   const base =
-    "relative shrink-0 size-[50px] rounded-[31px] flex items-center justify-center transition-all hover:scale-110 group";
+    "relative shrink-0 size-[38px] sm:size-[50px] rounded-[24px] sm:rounded-[31px] flex items-center justify-center transition-all hover:scale-110 group";
   const bg = active ? "bg-[#d4d4d4] text-black" : "bg-[#262626] text-[#d4d4d4]";
 
   const content = (
@@ -135,7 +135,7 @@ function LangToggle() {
   return (
     <button
       onClick={toggle}
-      className="relative shrink-0 h-[50px] px-3 rounded-[31px] flex items-center justify-center transition-all hover:scale-110 group bg-[#262626] text-[#d4d4d4]"
+      className="relative shrink-0 h-[38px] sm:h-[50px] px-2 sm:px-3 rounded-[24px] sm:rounded-[31px] flex items-center justify-center transition-all hover:scale-110 group bg-[#262626] text-[#d4d4d4]"
       title="Toggle language"
     >
       <span className="font-['IBM_Plex_Mono',monospace] text-xs tracking-widest select-none">
@@ -157,8 +157,8 @@ export function DockNav() {
   const isSkills = location.pathname === "/skills";
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="bg-[#171717] flex gap-[11px] items-center px-5 py-2.5 rounded-[18px] shadow-2xl">
+    <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-max max-w-[calc(100vw-16px)]">
+      <div className="bg-[#171717] flex gap-[6px] sm:gap-[11px] items-center px-3 py-2 sm:px-5 sm:py-2.5 rounded-[14px] sm:rounded-[18px] shadow-2xl">
         <DockItem to="/" active={isHome} label={t.navHome}>
           <HomeIcon />
         </DockItem>
