@@ -25,17 +25,22 @@ function HeroSection() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
+        <source src="/videos/hero.mp4" type="video/mp4" />
         <source src="/videos/hero.mov" type="video/quicktime" />
-        <source src="/videos/hero.mov" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute bottom-0 left-0 right-0 overflow-hidden py-8">
-        <p
-          className="whitespace-nowrap font-['Inter',sans-serif] font-medium text-white opacity-90"
-          style={{ fontSize: "clamp(40px, 9vw, 160px)", lineHeight: 1 }}
-        >
-          {t.heroText}
-        </p>
+        <div className="hero-marquee">
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              className="font-['Inter',sans-serif] font-medium text-white opacity-90 pr-24 shrink-0"
+              style={{ fontSize: "clamp(40px, 9vw, 160px)", lineHeight: 1 }}
+            >
+              {t.heroText}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -75,6 +80,12 @@ function AboutSection() {
               </svg>
             </div>
           </div>
+          <p
+            className="font-['IBM_Plex_Mono',monospace] text-[#999] text-right mt-6"
+            style={{ fontSize: "clamp(10px, 0.75vw, 13px)" }}
+          >
+            ✦ {t.portfolioNotice}
+          </p>
         </div>
       </div>
     </div>
@@ -85,15 +96,20 @@ function AboutSection() {
 function ProjectPlaceholder({
   gradient,
   stack,
+  desc,
 }: {
   gradient: string;
   stack: string;
+  desc: string;
 }) {
   return (
-    <div className={`w-full h-full rounded-[28px] bg-gradient-to-br ${gradient} flex flex-col items-center justify-center gap-3 p-6`}>
-      <span className="font-['IBM_Plex_Mono',monospace] text-white/60 text-center text-xs tracking-widest uppercase">
+    <div className={`w-full h-full rounded-[28px] bg-gradient-to-br ${gradient} flex flex-col items-start justify-end gap-2 p-8`}>
+      <span className="font-['IBM_Plex_Mono',monospace] text-white/50 text-xs tracking-widest uppercase">
         {stack}
       </span>
+      <p className="font-['DM_Sans',sans-serif] text-white/80 text-sm leading-relaxed">
+        {desc}
+      </p>
     </div>
   );
 }
@@ -109,15 +125,17 @@ function ProjectCard({
   title,
   stack,
   gradient,
+  desc,
 }: {
   title: string;
   stack: string;
   gradient: string;
+  desc: string;
 }) {
   return (
     <div className="flex flex-col gap-5 w-full">
       <div className="relative rounded-[28px] overflow-hidden aspect-[16/9]">
-        <ProjectPlaceholder gradient={gradient} stack={stack} />
+        <ProjectPlaceholder gradient={gradient} stack={stack} desc={desc} />
       </div>
       <div className="flex items-center gap-3">
         <ArrowIcon />
@@ -155,12 +173,12 @@ function ImpressiveWorksSection() {
 
       <div className="flex flex-col gap-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <ProjectCard title={projects[0].title} stack={projects[0].stack} gradient={projectGradients[0]} />
-          <ProjectCard title={projects[1].title} stack={projects[1].stack} gradient={projectGradients[1]} />
+          <ProjectCard title={projects[0].title} stack={projects[0].stack} gradient={projectGradients[0]} desc={projects[0].desc} />
+          <ProjectCard title={projects[1].title} stack={projects[1].stack} gradient={projectGradients[1]} desc={projects[1].desc} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <ProjectCard title={projects[2].title} stack={projects[2].stack} gradient={projectGradients[2]} />
-          <ProjectCard title={projects[3].title} stack={projects[3].stack} gradient={projectGradients[3]} />
+          <ProjectCard title={projects[2].title} stack={projects[2].stack} gradient={projectGradients[2]} desc={projects[2].desc} />
+          <ProjectCard title={projects[3].title} stack={projects[3].stack} gradient={projectGradients[3]} desc={projects[3].desc} />
         </div>
       </div>
 

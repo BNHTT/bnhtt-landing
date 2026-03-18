@@ -1,3 +1,18 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+@keyframes hero-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+.hero-marquee {
+  display: flex;
+  width: max-content;
+  animation: hero-marquee 30s linear infinite;
+}
+
+.hero-marquee:hover {
+  animation-play-state: paused;
+}

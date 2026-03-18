@@ -24,12 +24,14 @@ function ProjectCard({
   desc,
   status,
   color,
+  tag,
 }: {
   title: string;
   stack: string;
   desc: string;
   status: string;
   color: string;
+  tag?: string;
 }) {
   return (
     <div className="flex flex-col gap-5 w-full group cursor-pointer">
@@ -41,9 +43,16 @@ function ProjectCard({
           <p className="font-['DM_Sans',sans-serif] text-white/80 text-sm leading-relaxed max-w-sm">
             {desc}
           </p>
-          <span className="mt-4 font-['IBM_Plex_Mono',monospace] text-xs text-white/40 border border-white/20 rounded-full px-3 py-1">
-            {status}
-          </span>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <span className="font-['IBM_Plex_Mono',monospace] text-xs text-white/40 border border-white/20 rounded-full px-3 py-1">
+              {status}
+            </span>
+            {tag && (
+              <span className="font-['IBM_Plex_Mono',monospace] text-xs text-[#455CE9]/80 border border-[#455CE9]/30 rounded-full px-3 py-1">
+                {tag}
+              </span>
+            )}
+          </div>
         </div>
       </div>
       <div className="flex items-center gap-3">

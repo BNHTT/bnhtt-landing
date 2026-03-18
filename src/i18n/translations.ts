@@ -43,6 +43,7 @@ export const translations = {
         stack: "Python · OpenCV · MediaPipe",
         desc: "Gesture-based MIDI control via webcam",
         status: "R&D · Functional PoC",
+        tag: "Personal Project",
       },
     ],
 
@@ -94,6 +95,7 @@ export const translations = {
         desc: "Real-time gesture recognition for MIDI control using webcam and hand tracking.",
         status: "R&D · Functional PoC",
         color: "from-red-900 to-rose-800",
+        tag: "Personal Project",
       },
     ],
 
@@ -156,6 +158,9 @@ export const translations = {
     contactPhoneLabel: "WhatsApp",
     getInTouch: "Get in touch",
 
+    // Portfolio notice
+    portfolioNotice: "This portfolio is actively being updated — new projects and visuals coming soon.",
+
     // DockNav
     navHome: "Home",
     navProjects: "Projects",
@@ -208,6 +213,7 @@ export const translations = {
         stack: "Python · OpenCV · MediaPipe",
         desc: "Control MIDI por gestos con webcam",
         status: "R&D · PoC funcional",
+        tag: "Proyecto Personal",
       },
     ],
 
@@ -259,6 +265,7 @@ export const translations = {
         desc: "Reconocimiento de gestos en tiempo real para control MIDI con webcam y hand tracking.",
         status: "R&D · PoC funcional",
         color: "from-red-900 to-rose-800",
+        tag: "Proyecto Personal",
       },
     ],
 
@@ -320,6 +327,9 @@ export const translations = {
     contactEmailLabel: "Email",
     contactPhoneLabel: "WhatsApp",
     getInTouch: "Contactame",
+
+    // Portfolio notice
+    portfolioNotice: "Este portfolio está en constante actualización — nuevos proyectos e imágenes próximamente.",
 
     // DockNav
     navHome: "Inicio",
