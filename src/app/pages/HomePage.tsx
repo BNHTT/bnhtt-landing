@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { motion } from "motion/react";
 import { useLanguage } from "../../contexts/LanguageContext";
 import svgPaths from "../../imports/svg-s096nqqoxa";
+import { AppearingText } from "../../components/motion/AppearingText";
 
 function ArrowIcon() {
   return (
@@ -82,7 +83,7 @@ function AboutSection() {
           className="font-['DM_Sans',sans-serif] font-medium text-black w-full lg:max-w-[60%]"
           style={{ fontSize: "clamp(20px, 2.5vw, 40px)", lineHeight: 1.3 }}
         >
-          {t.aboutMain}
+          <AppearingText text={t.aboutMain} stagger={0.012} />
         </p>
         <div className="shrink-0 w-full lg:w-auto">
           <p
@@ -119,53 +120,23 @@ function AboutSection() {
   );
 }
 
-// Gradient placeholder card for projects
-function ProjectPlaceholder({
-  gradient,
-  stack,
-  subtitle,
-  desc,
-}: {
-  gradient: string;
-  stack: string;
-  subtitle: string;
-  desc: string;
-}) {
-  return (
-    <div className={`w-full rounded-[28px] bg-gradient-to-br ${gradient} flex flex-col items-start justify-end gap-1 p-8 min-h-[260px] md:min-h-[300px]`}>
-      <span className="font-['IBM_Plex_Mono',monospace] text-white/50 text-xs tracking-widest uppercase mb-2">
-        {stack}
-      </span>
-      <p className="font-['DM_Sans',sans-serif] text-white font-medium text-sm leading-snug">
-        {subtitle}
-      </p>
-      <p className="font-['DM_Sans',sans-serif] text-white/60 text-sm leading-relaxed">
-        {desc}
-      </p>
-    </div>
-  );
-}
-
-const projectGradients = [
-  "from-blue-900 to-indigo-800",
-  "from-violet-900 to-purple-800",
-  "from-teal-900 to-cyan-800",
-  "from-red-900 to-rose-800",
-];
-
 function ProjectCard({
   title,
   stack,
-  gradient,
+  color,
   subtitle,
   desc,
+  logo,
+  logoBg,
   delay = 0,
 }: {
   title: string;
   stack: string;
-  gradient: string;
+  color: string;
   subtitle: string;
   desc: string;
+  logo?: string;
+  logoBg?: string;
   delay?: number;
 }) {
   return (
@@ -177,7 +148,26 @@ function ProjectCard({
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
     >
       <div className="relative rounded-[28px] overflow-hidden">
-        <ProjectPlaceholder gradient={gradient} stack={stack} subtitle={subtitle} desc={desc} />
+        {logo && (
+          <div className={`absolute top-6 right-6 z-10 size-20 rounded-2xl shadow-lg ring-1 ring-black/10 flex items-center justify-center p-1.5 ${logoBg ?? "bg-white"}`}>
+            <img
+              src={logo}
+              alt={`${title} logo`}
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+        )}
+        <div className={`w-full bg-gradient-to-br ${color} flex flex-col items-start justify-end p-8 min-h-[260px] md:min-h-[300px]`}>
+          <span className="font-['IBM_Plex_Mono',monospace] text-white/50 text-xs tracking-widest uppercase mb-2">
+            {stack}
+          </span>
+          <p className="font-['DM_Sans',sans-serif] text-white font-medium text-sm leading-snug max-w-sm">
+            {subtitle}
+          </p>
+          <p className="font-['DM_Sans',sans-serif] text-white/60 text-sm leading-relaxed max-w-sm">
+            {desc}
+          </p>
+        </div>
       </div>
       <div className="flex items-center gap-3">
         <ArrowIcon />
@@ -203,7 +193,7 @@ function ImpressiveWorksSection() {
           className="font-['Inter',sans-serif] font-medium text-black"
           style={{ fontSize: "clamp(36px, 6vw, 100px)", lineHeight: 1 }}
         >
-          {t.worksTitle}
+          <AppearingText text={t.worksTitle} />
         </h2>
         <p
           className="font-['DM_Sans',sans-serif] font-light text-black max-w-[428px]"
@@ -215,12 +205,14 @@ function ImpressiveWorksSection() {
 
       <div className="flex flex-col gap-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <ProjectCard title={projects[0].title} stack={projects[0].stack} gradient={projectGradients[0]} subtitle={projects[0].subtitle} desc={projects[0].desc} delay={0} />
-          <ProjectCard title={projects[1].title} stack={projects[1].stack} gradient={projectGradients[1]} subtitle={projects[1].subtitle} desc={projects[1].desc} delay={0.15} />
+          {projects.slice(0, 2).map((p, i) => (
+            <ProjectCard key={p.title} {...p} delay={i * 0.15} />
+          ))}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <ProjectCard title={projects[2].title} stack={projects[2].stack} gradient={projectGradients[2]} subtitle={projects[2].subtitle} desc={projects[2].desc} delay={0} />
-          <ProjectCard title={projects[3].title} stack={projects[3].stack} gradient={projectGradients[3]} subtitle={projects[3].subtitle} desc={projects[3].desc} delay={0.15} />
+          {projects.slice(2, 4).map((p, i) => (
+            <ProjectCard key={p.title} {...p} delay={i * 0.15} />
+          ))}
         </div>
       </div>
 
@@ -252,13 +244,13 @@ function ContactFooter() {
             className="font-['Inter',sans-serif] font-normal text-black"
             style={{ fontSize: "clamp(32px, 5vw, 77px)", lineHeight: 1.1 }}
           >
-            {t.contactHeading}
+            <AppearingText text={t.contactHeading} />
           </p>
           <p
             className="font-['Inter',sans-serif] font-normal text-black"
             style={{ fontSize: "clamp(32px, 5vw, 77px)", lineHeight: 1.1 }}
           >
-            {t.contactHeading2}
+            <AppearingText text={t.contactHeading2} delay={0.1} />
           </p>
         </div>
 
@@ -278,7 +270,7 @@ function ContactFooter() {
               {t.contactPhoneLabel}
             </p>
             <p className="text-black font-['Inter',sans-serif]" style={{ fontSize: "clamp(16px, 1.5vw, 24px)" }}>
-              +54 9 11-3929-6842
+              +34 660 444 115
             </p>
           </div>
         </div>

@@ -7,3 +7,8 @@ desktop.ini
 packege.json
 *.log
 .DS_Store
+
+# Working materials (not part of the app)
+/dark_smoke.mp4
+/guidelines/
+/logos/

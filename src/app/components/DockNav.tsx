@@ -150,7 +150,7 @@ function LangToggle() {
 
 export function DockNav() {
   const location = useLocation();
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
 
   const isHome = location.pathname === "/";
   const isProjects = location.pathname === "/projects";
@@ -172,7 +172,7 @@ export function DockNav() {
         </DockItem>
 
         <DockItem
-          href={lang === "en" ? "/CV_Bruno_Nicolas_Huerres_EN.pdf" : "/CV_Bruno_Nicolas_Huerres_ES.pdf"}
+          href="/CV_Bruno_Nicolas_Huerres_Dev.pdf"
           label={t.navResume}
         >
           <FileIcon />

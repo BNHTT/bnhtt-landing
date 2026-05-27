@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { useLanguage } from "../../contexts/LanguageContext";
+import { AppearingText } from "../../components/motion/AppearingText";
 
 function ArrowIcon() {
   return (
@@ -27,6 +28,8 @@ function ProjectCard({
   status,
   color,
   tag,
+  logo,
+  logoBg,
   delay = 0,
 }: {
   title: string;
@@ -36,6 +39,8 @@ function ProjectCard({
   status: string;
   color: string;
   tag?: string;
+  logo?: string;
+  logoBg?: string;
   delay?: number;
 }) {
   return (
@@ -47,6 +52,18 @@ function ProjectCard({
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
     >
       <div className="relative rounded-[28px] overflow-hidden">
+        {/* Uniform logo badge — top-right, same size for every card */}
+        {logo ? (
+          <div className={`absolute top-6 right-6 z-10 size-20 rounded-2xl shadow-lg ring-1 ring-black/10 flex items-center justify-center p-1.5 ${logoBg ?? "bg-white"}`}>
+            <img
+              src={logo}
+              alt={`${title} logo`}
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+        ) : null}
+        
+        {/* Contenido */}
         <div className={`w-full bg-gradient-to-br ${color} flex flex-col items-start justify-end p-8 min-h-[280px] md:min-h-[320px]`}>
           <span className="font-['IBM_Plex_Mono',monospace] text-white/50 text-xs tracking-widest uppercase mb-3">
             {stack}
@@ -136,7 +153,7 @@ function ContactFooter() {
               {t.contactPhoneLabel}
             </p>
             <p className="text-black font-['Inter',sans-serif]" style={{ fontSize: "clamp(16px, 1.5vw, 24px)" }}>
-              +54 9 11-3929-6842
+              +34 660 444 115
             </p>
           </div>
         </div>
@@ -167,27 +184,19 @@ export default function ProjectsPage() {
             className="font-['Inter',sans-serif] font-medium text-black max-w-4xl"
             style={{ fontSize: "clamp(28px, 5vw, 80px)", lineHeight: 1.15 }}
           >
-            {t.projectsPageHeading}
+            <AppearingText text={t.projectsPageHeading} />
           </h1>
         </div>
 
         {/* Main projects grid */}
         <div className="flex flex-col gap-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {t.allProjects.slice(0, 2).map((p, i) => (
-              <ProjectCard key={p.title} {...p} delay={i * 0.15} />
-            ))}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {t.allProjects.slice(2, 4).map((p, i) => (
-              <ProjectCard key={p.title} {...p} delay={i * 0.15} />
-            ))}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {t.allProjects.slice(4, 6).map((p, i) => (
-              <ProjectCard key={p.title} {...p} delay={i * 0.15} />
-            ))}
-          </div>
+          {Array.from({ length: Math.ceil(t.allProjects.length / 2) }, (_, row) => (
+            <div key={row} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {t.allProjects.slice(row * 2, row * 2 + 2).map((p, i) => (
+                <ProjectCard key={p.title} {...p} delay={i * 0.15} />
+              ))}
+            </div>
+          ))}
         </div>
 
         {/* Academic projects */}
