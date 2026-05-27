@@ -128,7 +128,11 @@ function ContactFooter() {
         </div>
       </div>
       <div className="absolute right-8 md:right-16 lg:right-24 bottom-8 md:bottom-16">
-        <a href="mailto:brunohuerres99@gmail.com">
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=brunohuerres99@gmail.com&su=Hola%20Bruno%20%E2%80%94%20Quiero%20contactarte"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div className="size-[140px] md:size-[180px] lg:size-[200px] rounded-full bg-[#455CE9] flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
             <span className="font-['Inter',sans-serif] text-white text-center" style={{ fontSize: "clamp(12px, 1.2vw, 20px)" }}>
               {t.getInTouch}
