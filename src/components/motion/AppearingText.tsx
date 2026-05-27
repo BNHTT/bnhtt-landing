@@ -36,6 +36,7 @@ export function AppearingText({
 
   return (
     <motion.span
+      key={text}
       className={className}
       style={{ display: "inline-block", ...style }}
       initial="hidden"
