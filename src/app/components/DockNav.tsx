@@ -186,7 +186,10 @@ export function DockNav() {
           <LinkedInIcon />
         </DockItem>
 
-        <DockItem href="mailto:brunohuerres99@gmail.com" label={t.navContact}>
+        <DockItem
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=brunohuerres99@gmail.com&su=Hola%20Bruno%20%E2%80%94%20Quiero%20contactarte"
+          label={t.navContact}
+        >
           <ArrowUpRightIcon />
         </DockItem>
 
