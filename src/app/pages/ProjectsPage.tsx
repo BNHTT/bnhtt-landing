@@ -54,7 +54,7 @@ function ProjectCard({
       <div className="relative rounded-[28px] overflow-hidden">
         {/* Uniform logo badge — top-right, same size for every card */}
         {logo ? (
-          <div className={`absolute top-6 right-6 z-10 size-20 rounded-2xl shadow-lg ring-1 ring-black/10 flex items-center justify-center p-1.5 ${logoBg ?? "bg-white"}`}>
+          <div className={`absolute top-4 right-4 md:top-6 md:right-6 z-10 size-14 md:size-20 rounded-xl md:rounded-2xl shadow-lg ring-1 ring-black/10 flex items-center justify-center p-1.5 ${logoBg ?? "bg-white"}`}>
             <img
               src={logo}
               alt={`${title} logo`}
@@ -62,9 +62,9 @@ function ProjectCard({
             />
           </div>
         ) : null}
-        
+
         {/* Contenido */}
-        <div className={`w-full bg-gradient-to-br ${color} flex flex-col items-start justify-end p-8 min-h-[280px] md:min-h-[320px]`}>
+        <div className={`w-full bg-gradient-to-br ${color} flex flex-col items-start justify-end p-6 md:p-8 min-h-[360px] md:min-h-[320px]`}>
           <span className="font-['IBM_Plex_Mono',monospace] text-white/50 text-xs tracking-widest uppercase mb-3">
             {stack}
           </span>
@@ -158,13 +158,13 @@ function ContactFooter() {
           </div>
         </div>
       </div>
-      <div className="absolute right-8 md:right-16 lg:right-24 bottom-8 md:bottom-16">
+      <div className="absolute right-4 bottom-4 md:right-16 md:bottom-16 lg:right-24">
         <a
           href="https://mail.google.com/mail/?view=cm&fs=1&to=brunohuerres99@gmail.com&su=Hola%20Bruno%20%E2%80%94%20Quiero%20contactarte"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="size-[140px] md:size-[180px] lg:size-[200px] rounded-full bg-[#455CE9] flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
+          <div className="size-[110px] md:size-[180px] lg:size-[200px] rounded-full bg-[#455CE9] flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
             <span className="font-['Inter',sans-serif] text-white text-center" style={{ fontSize: "clamp(12px, 1.2vw, 20px)" }}>
               {t.getInTouch}
             </span>
